@@ -1,0 +1,8 @@
+// 1. The main Hex color
+$primary: #9D00FF; 
+
+// 2. The RGB version (Required for transparent tints)
+// You can get these numbers from any color picker
+$primary-rgb: 157, 0, 255; 
+
+@import "../bootstrap-source/scss/bootstrap";
