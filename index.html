@@ -4,15 +4,52 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Theme Demo</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
     <link
       id="theme-style"
       rel="stylesheet"
-      href="bootstrap-source/dist/css/bootstrap.min.css"
+      href="css/bootstrap.css"
     />
     <link rel="stylesheet" href="css/style.css" />
+    <script>
+      function getLocalStorageTheme() {
+        return localStorage.getItem('bs-theme') || 'system';
+      }
+      // Set initial theme immediately to prevent flash
+      (function() {
+        const html = document.documentElement;
+        const savedTheme = getLocalStorageTheme();
+        
+        if (savedTheme === 'system') {
+          const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+          html.setAttribute('data-bs-theme', prefersDark ? 'dark' : 'light');
+        } else {
+          html.setAttribute('data-bs-theme', savedTheme);
+        }
+      })();
+    </script>
   </head>
   <body>
-    <nav class="navbar navbar-expand-lg bg-light">
+    <!-- Modal -->
+    <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h1 class="modal-title fs-5" id="staticBackdropLabel">Modal title</h1>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <p>I will not close if you click outside of me. Don't even try to press escape key.</p>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-primary">Understood</button>
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Nav -->
+    <nav class="navbar navbar-expand-lg">
       <div class="container-fluid">
         <a class="navbar-brand" href="#">Bootstrap Theme Demo</a>
         <button
@@ -64,30 +101,20 @@
               placeholder="Search"
               aria-label="Search"
             />
-            <button class="btn btn-outline-success" type="submit">
+            <button class="btn btn-outline-success me-2" type="submit">
               Search
             </button>
           </form>
+          <button type="button" class="btn btn-outline-primary mt-3 mt-lg-0" id="theme-toggle-btn" onclick="toggleTheme()" data-bs-toggle="tooltip" data-bs-title="Toggle theme (light/dark/system)">
+            <i class="bi bi-sun d-none"></i>
+          </button>
         </div>
       </div>
     </nav>
     <div class="container">
-      <div class="my-3 d-flex justify-content-between">
-				<div class="btn-group" role="group" aria-label="Component toggle">
-					<input type="radio" class="btn-check" name="demoComponent" id="demoForm" autocomplete="off" onclick="addForm()">
-					<label class="btn btn-outline-secondary" for="demoForm">Form</label>
-
-					<input type="radio" class="btn-check" name="demoComponent" id="demoHorizontalForm" autocomplete="off" onclick="addHorizontalForm()">
-					<label class="btn btn-outline-secondary" for="demoHorizontalForm">Horizontal Form</label>
-
-					<input type="radio" class="btn-check" name="demoComponent" id="demoValidation" autocomplete="off" onclick="addValidation()">
-					<label class="btn btn-outline-secondary" for="demoValidation">Validation</label>
-
-					<input type="radio" class="btn-check" name="demoComponent" id="demoSpinner" autocomplete="off" onclick="addSpinner()">
-					<label class="btn btn-outline-secondary" for="demoSpinner">Spinner</label>
-				</div>
+      <div class="my-3 d-flex flex-column justify-content-between">
         <div
-          class="btn-group"
+          class="btn-group mb-3"
           role="group"
           aria-label="Theme toggle"
         >
@@ -101,6 +128,16 @@
             checked
           />
           <label class="btn btn-outline-primary" for="demoThemeNone">None</label>
+
+          <input
+            type="radio"
+            class="btn-check"
+            name="demoTheme"
+            id="demoThemeDeskbooker"
+            autocomplete="off"
+            onclick="swap('deskbooker')"
+          />
+          <label class="btn btn-outline-primary" for="demoThemeDeskbooker">Deskbooker</label>
 
           <input
             type="radio"
@@ -122,9 +159,43 @@
           />
           <label class="btn btn-outline-primary" for="demoThemeHSES">HSES</label>
         </div>
+        <div>
+          <div class="mb-3">
+            <select id="demoComponentSelect" class="form-select" onchange="handleComponentSelect(this.value)">
+              <option value="">Select component...</option>
+              <option value="accordion">Accordion</option>
+              <option value="alert">Alert</option>
+              <option value="badge">Badge</option>
+              <option value="carousel">Carousel</option>
+              <option value="form">Form</option>
+              <option value="horizontalForm">Horizontal Form</option>
+              <option value="progress">Progress</option>
+              <option value="spinner">Spinner</option>
+              <option value="validation">Validation</option>
+            </select>
+          </div>
+          
+          <div class="btn-group" role="group" aria-label="Component toggle">
+            <!-- Button trigger modal -->
+            <button type="button" class="btn btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+              Modal
+            </button>
+            
+            <button type="button" class="btn btn-outline-secondary"
+              data-bs-toggle="tooltip"
+              data-bs-title="This is a normal BS tooltip."
+              >
+              Tooltip
+            </button>
+
+            <button type="button" class="btn btn-outline-secondary" data-bs-toggle="popover" data-bs-title="Popover title" data-bs-content="And here's some amazing content. It's very engaging. Right?">
+              Popover
+            </button>
+          </div>
+        </div>
       </div>
 
-      <div id="demo-container" class="container-sm"></div>
+      <div id="demo-container" class="container-sm mt-3"></div>
     </div>
 
     <script src="bootstrap-source/dist/js/bootstrap.bundle.min.js"></script>
@@ -132,18 +203,9 @@
 
     <script>
       document.addEventListener("DOMContentLoaded", function () {
+        setThemeIcon(getLocalStorageTheme());
         setTooltips();
       });
-
-      function swap(theme) {
-        if (!theme) {
-          document.getElementById("theme-style").href =
-            "bootstrap-source/dist/css/bootstrap.min.css";
-          return;
-        }
-        document.getElementById("theme-style").href =
-          `css/${theme}-bootstrap.css`;
-      }
 
       function setTooltips() {
         const tooltipTriggerList = document.querySelectorAll(
@@ -152,7 +214,7 @@
         const tooltipList = [...tooltipTriggerList].map(
           (tooltipTriggerEl) => new bootstrap.Tooltip(tooltipTriggerEl),
         );
-
+        
         const popoverTriggerList = document.querySelectorAll(
           '[data-bs-toggle="popover"]',
         );
@@ -160,6 +222,136 @@
           (popoverTriggerEl) => new bootstrap.Popover(popoverTriggerEl),
         );
       }
+
+      function hideTooltips() {
+        const tooltipTriggerList = document.querySelectorAll(
+          '[data-bs-toggle="tooltip"]',
+        );
+        tooltipTriggerList.forEach(tooltipTriggerEl => {
+          const tooltipInstance = bootstrap.Tooltip.getInstance(tooltipTriggerEl);
+          if (tooltipInstance) {
+            tooltipInstance.hide();
+          }
+        });
+        const popoverTriggerList = document.querySelectorAll(
+            '[data-bs-toggle="popover"]',
+          );
+        popoverTriggerList.forEach(popoverTriggerEl => {
+          const popoverInstance = bootstrap.Popover.getInstance(popoverTriggerEl);
+          if (popoverInstance) {
+            popoverInstance.hide();
+          }
+        });
+      }
+    </script>
+
+    <script>
+      function swap(appTheme) {
+        if (!appTheme) {
+          document.getElementById("theme-style").href =
+            "css/bootstrap.css";
+          return;
+        }
+        document.getElementById("theme-style").href =
+          `css/${appTheme}-bootstrap.css`;
+      }
+    </script>
+
+    <script>
+      function handleComponentSelect(value) {
+        switch (value) {
+          case 'accordion':
+            addAccordion();
+            break;
+          case 'alert':
+            addAlert();
+            break;
+          case 'badge':
+            addBadge();
+            break;
+          case 'carousel':
+            addCarousel();
+            break;
+          case 'form':
+            addForm();
+            break;
+          case 'horizontalForm':
+            addHorizontalForm();
+            break;
+          case 'progress':
+            addProgress();
+            break;
+          case 'spinner':
+            addSpinner();
+            break;
+          case 'validation':
+            addValidation();
+            break;
+          default:
+            document.getElementById('demo-container').innerHTML = '';
+        }
+      }
+    </script>
+
+    <script>
+      function setThemeIcon(theme) {
+        console.log('Setting theme icon for theme:', theme);
+
+        const button = document.getElementById('theme-toggle-btn');
+
+        if (theme === 'system') {
+          button.innerHTML = '<i class="bi bi-gear"></i>';
+        } else if (theme === 'dark') {
+          button.innerHTML = '<i class="bi bi-moon"></i>';
+        } else {
+          button.innerHTML = '<i class="bi bi-sun"></i>';
+        }
+
+        // Update tooltip title to reflect the next theme on toggle
+        const nextTheme = setNextTheme(theme);
+        button.setAttribute('data-bs-title', `Switch to ${nextTheme} theme`);
+        setTooltips();
+      }
+
+      function setNextTheme(currentTheme) {
+        if (currentTheme === 'light') {
+          return 'dark';
+        } else if (currentTheme === 'dark') {
+          return 'system';
+        } else {
+          return 'light';
+        }
+      }
+
+      function toggleTheme() {
+        hideTooltips(); // hide any open tooltips before theme change
+        const html = document.documentElement;
+        const currentTheme = getLocalStorageTheme();
+        const nextTheme = setNextTheme(currentTheme);
+        
+        localStorage.setItem('bs-theme', nextTheme);
+        
+        if (nextTheme === 'system') {
+          const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+          html.setAttribute('data-bs-theme', prefersDark ? 'dark' : 'light');
+        } else if (nextTheme === 'dark') {
+          html.setAttribute('data-bs-theme', nextTheme);
+        } else {
+          html.setAttribute('data-bs-theme', nextTheme);
+        }
+        setThemeIcon(nextTheme);
+      }
+
+      // add event listener to update theme icon when system theme changes (for system mode)
+      window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', e => {
+        const savedTheme = getLocalStorageTheme();
+        if (savedTheme === 'system') {
+          const html = document.documentElement;
+          const newTheme = e.matches ? 'dark' : 'light';
+          html.setAttribute('data-bs-theme', newTheme);
+          setThemeIcon('system'); // icon stays the same in system mode
+        }
+      });
     </script>
   </body>
 </html>
