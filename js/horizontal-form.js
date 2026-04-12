@@ -1,7 +1,7 @@
 export function addHorizontalForm() {
   const container = document.getElementById("demo-container");
 
-  const html = `
+  const html = /* html */ `
     <form>
       <div class="row mb-3">
         <label for="inputEmail3" class="col-sm-2 col-form-label">Email</label>

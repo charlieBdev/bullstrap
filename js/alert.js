@@ -1,7 +1,7 @@
 export function addAlert() {
   const container = document.getElementById("demo-container");
 
-  const html = `
+  const html = /* html */ `
     <div class="alert alert-primary" role="alert">
       A simple primary alert—check it out!
     </div>

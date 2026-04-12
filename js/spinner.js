@@ -1,6 +1,7 @@
 export function addSpinner() {
 	const container = document.getElementById('demo-container');
-	const html = `
+	
+	const html = /* html */ `
 		<div class="d-flex justify-content-center mb-3">
 			<div class="spinner-border text-primary" role="status">
 				<span class="visually-hidden">Loading...</span>

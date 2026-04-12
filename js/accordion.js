@@ -1,7 +1,7 @@
 export function addAccordion() {
   const container = document.getElementById("demo-container");
 
-  const html = `
+  const html = /* html */ `
     <div class="accordion" id="accordionExample">
       <div class="accordion-item">
         <h2 class="accordion-header" id="headingOne">

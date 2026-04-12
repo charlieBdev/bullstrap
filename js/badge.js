@@ -1,7 +1,7 @@
 export function addBadge() {
   const container = document.getElementById("demo-container");
 
-  const html = `
+  const html = /* html */ `
     <div class="d-flex gap-3 mb-3">
       <button type="button" class="btn btn-primary">
         Notifications <span class="badge text-bg-secondary">4</span>
@@ -23,7 +23,7 @@ export function addBadge() {
       </button>
     </div>
 
-    <div class="d-flex gap-3 mb-3">
+    <div class="d-flex flex-wrap gap-3 mb-3">
       <span class="badge text-bg-primary">Primary</span>
       <span class="badge text-bg-secondary">Secondary</span>
       <span class="badge text-bg-success">Success</span>
@@ -34,7 +34,7 @@ export function addBadge() {
       <span class="badge text-bg-dark">Dark</span>
     </div>
 
-    <div class="d-flex gap-3">
+    <div class="d-flex flex-wrap gap-3">
       <span class="badge rounded-pill text-bg-primary">Primary</span>
       <span class="badge rounded-pill text-bg-secondary">Secondary</span>
       <span class="badge rounded-pill text-bg-success">Success</span>

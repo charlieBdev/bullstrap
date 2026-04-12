@@ -1,7 +1,7 @@
 export function addForm() {
   const container = document.getElementById("demo-container");
 
-  const html = `
+  const html = /* html */ `
     <form>
       <div class="form-floating mb-3">
         <input type="email" class="form-control" id="floatingInput" placeholder="name@example.com">

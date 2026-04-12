@@ -1,7 +1,7 @@
 export function addProgress() {
   const container = document.getElementById("demo-container");
 
-  const html = `
+  const html = /* html */ `
     <div class="progress mb-3">
       <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-label="Example with label" style="width: 25%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">25%</div>
     </div>

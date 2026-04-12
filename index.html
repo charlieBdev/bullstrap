@@ -8,7 +8,7 @@
     <link
       id="theme-style"
       rel="stylesheet"
-      href="css/bootstrap.css"
+      href="bootstrap-source/dist/css/bootstrap.css"
     />
     <link rel="stylesheet" href="css/style.css" />
     <script>
@@ -50,7 +50,7 @@
     </div>
     <!-- Nav -->
     <nav class="navbar navbar-expand-lg">
-      <div class="container-fluid">
+      <div class="container-xxl">
         <a class="navbar-brand" href="#">Bootstrap Theme Demo</a>
         <button
           class="navbar-toggler"
@@ -105,13 +105,41 @@
               Search
             </button>
           </form>
-          <button type="button" class="btn btn-outline-primary mt-3 mt-lg-0" id="theme-toggle-btn" onclick="toggleTheme()" data-bs-toggle="tooltip" data-bs-title="Toggle theme (light/dark/system)">
-            <i class="bi bi-sun d-none"></i>
-          </button>
+          <div class="nav-item dropdown mt-2 mt-lg-0">
+            <button
+              id="bd-theme-text" 
+              class="btn btn-outline-primary dropdown-toggle d-flex align-items-center"
+              type="button"
+              data-bs-toggle="dropdown"
+              aria-expanded="false"
+            >
+              <i class="bi"></i>
+            </button>
+            <ul class="dropdown-menu dropdown-menu-lg-end shadow" aria-labelledby="bd-theme-text">
+              <li>
+                <button type="button" class="dropdown-item d-flex align-items-center" data-bs-theme-value="light" onclick="toggleTheme('light')">
+                  <i class="bi bi-sun-fill me-2"></i>
+                  Light
+                </button>
+              </li>
+              <li>
+                <button type="button" class="dropdown-item d-flex align-items-center" data-bs-theme-value="dark" onclick="toggleTheme('dark')">
+                  <i class="bi bi-moon-stars-fill me-2"></i>
+                  Dark
+                </button>
+              </li>
+              <li>
+                <button type="button" class="dropdown-item d-flex align-items-center" data-bs-theme-value="system" onclick="toggleTheme('system')">
+                  <i class="bi bi-circle-half me-2"></i>
+                  Auto
+                </button>
+              </li>
+            </ul>
+          </div>
         </div>
       </div>
     </nav>
-    <div class="container">
+    <div class="container-xxl">
       <div class="my-3 d-flex flex-column justify-content-between">
         <div
           class="btn-group mb-3"
@@ -124,7 +152,7 @@
             name="demoTheme"
             id="demoThemeNone"
             autocomplete="off"
-            onclick="swap()"
+            onclick="swapAppTheme()"
             checked
           />
           <label class="btn btn-outline-primary" for="demoThemeNone">None</label>
@@ -135,7 +163,7 @@
             name="demoTheme"
             id="demoThemeDeskbooker"
             autocomplete="off"
-            onclick="swap('deskbooker')"
+            onclick="swapAppTheme('deskbooker')"
           />
           <label class="btn btn-outline-primary" for="demoThemeDeskbooker">Deskbooker</label>
 
@@ -145,7 +173,7 @@
             name="demoTheme"
             id="demoThemeIris"
             autocomplete="off"
-            onclick="swap('iris')"
+            onclick="swapAppTheme('iris')"
           />
           <label class="btn btn-outline-primary" for="demoThemeIris">Iris</label>
 
@@ -155,7 +183,7 @@
             name="demoTheme"
             id="demoThemeHSES"
             autocomplete="off"
-            onclick="swap('hses')"
+            onclick="swapAppTheme('hses')"
           />
           <label class="btn btn-outline-primary" for="demoThemeHSES">HSES</label>
         </div>
@@ -203,8 +231,8 @@
 
     <script>
       document.addEventListener("DOMContentLoaded", function () {
-        setThemeIcon(getLocalStorageTheme());
-        setTooltips();
+        const savedTheme = getLocalStorageTheme();
+        toggleTheme(savedTheme);
       });
 
       function setTooltips() {
@@ -222,34 +250,13 @@
           (popoverTriggerEl) => new bootstrap.Popover(popoverTriggerEl),
         );
       }
-
-      function hideTooltips() {
-        const tooltipTriggerList = document.querySelectorAll(
-          '[data-bs-toggle="tooltip"]',
-        );
-        tooltipTriggerList.forEach(tooltipTriggerEl => {
-          const tooltipInstance = bootstrap.Tooltip.getInstance(tooltipTriggerEl);
-          if (tooltipInstance) {
-            tooltipInstance.hide();
-          }
-        });
-        const popoverTriggerList = document.querySelectorAll(
-            '[data-bs-toggle="popover"]',
-          );
-        popoverTriggerList.forEach(popoverTriggerEl => {
-          const popoverInstance = bootstrap.Popover.getInstance(popoverTriggerEl);
-          if (popoverInstance) {
-            popoverInstance.hide();
-          }
-        });
-      }
     </script>
 
     <script>
-      function swap(appTheme) {
+      function swapAppTheme(appTheme) {
         if (!appTheme) {
           document.getElementById("theme-style").href =
-            "css/bootstrap.css";
+            "bootstrap-source/dist/css/bootstrap.css";
           return;
         }
         document.getElementById("theme-style").href =
@@ -294,62 +301,54 @@
     </script>
 
     <script>
-      function setThemeIcon(theme) {
-        console.log('Setting theme icon for theme:', theme);
-
-        const button = document.getElementById('theme-toggle-btn');
+      function toggleTheme(theme) {
+        const html = document.documentElement;
+        localStorage.setItem('bs-theme', theme);
 
         if (theme === 'system') {
-          button.innerHTML = '<i class="bi bi-gear"></i>';
-        } else if (theme === 'dark') {
-          button.innerHTML = '<i class="bi bi-moon"></i>';
-        } else {
-          button.innerHTML = '<i class="bi bi-sun"></i>';
-        }
-
-        // Update tooltip title to reflect the next theme on toggle
-        const nextTheme = setNextTheme(theme);
-        button.setAttribute('data-bs-title', `Switch to ${nextTheme} theme`);
-        setTooltips();
-      }
-
-      function setNextTheme(currentTheme) {
-        if (currentTheme === 'light') {
-          return 'dark';
-        } else if (currentTheme === 'dark') {
-          return 'system';
-        } else {
-          return 'light';
-        }
-      }
-
-      function toggleTheme() {
-        hideTooltips(); // hide any open tooltips before theme change
-        const html = document.documentElement;
-        const currentTheme = getLocalStorageTheme();
-        const nextTheme = setNextTheme(currentTheme);
-        
-        localStorage.setItem('bs-theme', nextTheme);
-        
-        if (nextTheme === 'system') {
           const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
           html.setAttribute('data-bs-theme', prefersDark ? 'dark' : 'light');
-        } else if (nextTheme === 'dark') {
-          html.setAttribute('data-bs-theme', nextTheme);
         } else {
-          html.setAttribute('data-bs-theme', nextTheme);
+          html.setAttribute('data-bs-theme', theme);
         }
-        setThemeIcon(nextTheme);
+
+        showActiveTheme(theme);
+      }
+
+      function showActiveTheme(theme) {
+        const themeButton = document.querySelector('#bd-theme-text');
+        const activeBtn = document.querySelector(`[data-bs-theme-value="${theme}"]`);
+        
+        if (themeButton && activeBtn) {
+          const activeIcon = activeBtn.querySelector('i');
+          const btnIcon = themeButton.querySelector('i');
+          
+          if (activeIcon && btnIcon) {
+            // Use the classList instead of cloning to prevent "empty" nodes
+            btnIcon.className = activeIcon.className; 
+            btnIcon.classList.remove('me-2'); // Clean up menu-specific classes
+          }
+        }
+
+        // 2. Remove 'active' class from all items and add to current
+        document.querySelectorAll('[data-bs-theme-value]').forEach(el => {
+          el.classList.remove('active');
+          el.setAttribute('aria-pressed', 'false');
+        });
+
+        if (activeBtn) {
+          activeBtn.classList.add('active');
+          activeBtn.setAttribute('aria-pressed', 'true');
+        }
       }
 
       // add event listener to update theme icon when system theme changes (for system mode)
-      window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', e => {
+      window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', () => {
         const savedTheme = getLocalStorageTheme();
+        
+        // Only auto-switch the UI if the user is currently in 'system' mode
         if (savedTheme === 'system') {
-          const html = document.documentElement;
-          const newTheme = e.matches ? 'dark' : 'light';
-          html.setAttribute('data-bs-theme', newTheme);
-          setThemeIcon('system'); // icon stays the same in system mode
+          toggleTheme('system');
         }
       });
     </script>

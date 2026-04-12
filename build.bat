@@ -1,7 +1,4 @@
 @REM May have to highlight and run one by one if only does first one
-echo Building Bootstrap Theme...
-.\compiler\sass.bat scss/bootstrap.scss css/bootstrap.css
-echo Bootstrap done.
 
 echo Building Deskbooker Theme...
 .\compiler\sass.bat scss/deskbooker.scss css/deskbooker-bootstrap.css

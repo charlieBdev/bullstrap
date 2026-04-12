@@ -1,7 +1,7 @@
 export function addCarousel() {
   const container = document.getElementById("demo-container");
   
-  const html = `
+  const html = /* html */ `
     <div id="carouselExampleCaptions" class="carousel slide" data-bs-ride="false">
       <div class="carousel-indicators">
         <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
