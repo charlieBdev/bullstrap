@@ -1,358 +1,203 @@
 <!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Theme Demo</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
-    <link
-      id="theme-style"
-      rel="stylesheet"
-      href="bootstrap-source/dist/css/bootstrap.css"
-    />
-    <link rel="stylesheet" href="css/style.css" />
-    <script>
-      function getLocalStorageTheme() {
-        return localStorage.getItem('bs-theme') || 'system';
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Theme Demo</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
+  <link id="theme-style" rel="stylesheet" href="bootstrap-source/dist/css/bootstrap.css" />
+  <link rel="stylesheet" href="css/style.css" />
+  <script>
+    function getLocalStorageTheme() {
+      return localStorage.getItem('bs-theme') || 'system';
+    }
+    // Set initial theme immediately to prevent flash
+    (function () {
+      const html = document.documentElement;
+      const savedTheme = getLocalStorageTheme();
+
+      if (savedTheme === 'system') {
+        const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+        html.setAttribute('data-bs-theme', prefersDark ? 'dark' : 'light');
+      } else {
+        html.setAttribute('data-bs-theme', savedTheme);
       }
-      // Set initial theme immediately to prevent flash
-      (function() {
-        const html = document.documentElement;
-        const savedTheme = getLocalStorageTheme();
-        
-        if (savedTheme === 'system') {
-          const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-          html.setAttribute('data-bs-theme', prefersDark ? 'dark' : 'light');
-        } else {
-          html.setAttribute('data-bs-theme', savedTheme);
-        }
-      })();
-    </script>
-  </head>
-  <body>
-    <!-- Modal -->
-    <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-      <div class="modal-dialog">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h1 class="modal-title fs-5" id="staticBackdropLabel">Modal title</h1>
-            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-          </div>
-          <div class="modal-body">
-            <p>I will not close if you click outside of me. Don't even try to press escape key.</p>
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-primary">Understood</button>
-            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-          </div>
+    })();
+  </script>
+</head>
+
+<body>
+  <!-- Modal -->
+  <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+    aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="staticBackdropLabel">Modal title</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <p>I will not close if you click outside of me. Don't even try to press escape key.</p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-primary">Understood</button>
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
         </div>
       </div>
     </div>
-    <!-- Nav -->
-    <nav class="navbar navbar-expand-lg">
-      <div class="container-xxl">
-        <a class="navbar-brand" href="#">Bootstrap Theme Demo</a>
-        <button
-          class="navbar-toggler"
-          type="button"
-          data-bs-toggle="collapse"
-          data-bs-target="#navbarSupportedContent"
-          aria-controls="navbarSupportedContent"
-          aria-expanded="false"
-          aria-label="Toggle navigation"
-        >
-          <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-            <li class="nav-item">
-              <a class="nav-link active" aria-current="page" href="#">Home</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#">Link</a>
-            </li>
-            <li class="nav-item dropdown">
-              <a
-                class="nav-link dropdown-toggle"
-                href="#"
-                role="button"
-                data-bs-toggle="dropdown"
-                aria-expanded="false"
-              >
-                Dropdown
-              </a>
-              <ul class="dropdown-menu">
-                <li><a class="dropdown-item" href="#">Action</a></li>
-                <li><a class="dropdown-item" href="#">Another action</a></li>
-                <li><hr class="dropdown-divider" /></li>
-                <li>
-                  <a class="dropdown-item" href="#">Something else here</a>
-                </li>
-              </ul>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link disabled">Disabled</a>
-            </li>
-          </ul>
-          <form class="d-flex" role="search">
-            <input
-              class="form-control me-2"
-              type="search"
-              placeholder="Search"
-              aria-label="Search"
-            />
-            <button class="btn btn-outline-success me-2" type="submit">
-              Search
-            </button>
-          </form>
-          <div class="nav-item dropdown mt-2 mt-lg-0">
-            <button
-              id="bd-theme-text" 
-              class="btn btn-outline-primary dropdown-toggle d-flex align-items-center"
-              type="button"
-              data-bs-toggle="dropdown"
-              aria-expanded="false"
-            >
-              <i class="bi"></i>
-            </button>
-            <ul class="dropdown-menu dropdown-menu-lg-end shadow" aria-labelledby="bd-theme-text">
+  </div>
+  <!-- Nav -->
+  <nav class="navbar navbar-expand-lg">
+    <div class="container-xxl">
+      <a class="navbar-brand" href="#">Bootstrap Theme Demo</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="#">Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Link</a>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              Dropdown
+            </a>
+            <ul class="dropdown-menu">
+              <li><a class="dropdown-item" href="#">Action</a></li>
+              <li><a class="dropdown-item" href="#">Another action</a></li>
               <li>
-                <button type="button" class="dropdown-item d-flex align-items-center" data-bs-theme-value="light" onclick="toggleTheme('light')">
-                  <i class="bi bi-sun-fill me-2"></i>
-                  Light
-                </button>
+                <hr class="dropdown-divider" />
               </li>
               <li>
-                <button type="button" class="dropdown-item d-flex align-items-center" data-bs-theme-value="dark" onclick="toggleTheme('dark')">
-                  <i class="bi bi-moon-stars-fill me-2"></i>
-                  Dark
-                </button>
-              </li>
-              <li>
-                <button type="button" class="dropdown-item d-flex align-items-center" data-bs-theme-value="system" onclick="toggleTheme('system')">
-                  <i class="bi bi-circle-half me-2"></i>
-                  Auto
-                </button>
+                <a class="dropdown-item" href="#">Something else here</a>
               </li>
             </ul>
-          </div>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link disabled">Disabled</a>
+          </li>
+        </ul>
+        <form class="d-flex" role="search">
+          <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" />
+          <button class="btn btn-outline-success me-2" type="submit">
+            Search
+          </button>
+        </form>
+        <div class="nav-item dropdown mt-2 mt-lg-0">
+          <button id="bd-theme-text" class="btn btn-outline-primary dropdown-toggle d-flex align-items-center"
+            type="button" data-bs-toggle="dropdown" aria-expanded="false">
+            <i class="bi"></i>
+          </button>
+          <ul class="dropdown-menu dropdown-menu-lg-end shadow" aria-labelledby="bd-theme-text">
+            <li>
+              <button type="button" class="dropdown-item d-flex align-items-center" data-bs-theme-value="light"
+                onclick="toggleTheme('light')">
+                <i class="bi bi-sun-fill me-2"></i>
+                Light
+              </button>
+            </li>
+            <li>
+              <button type="button" class="dropdown-item d-flex align-items-center" data-bs-theme-value="dark"
+                onclick="toggleTheme('dark')">
+                <i class="bi bi-moon-stars-fill me-2"></i>
+                Dark
+              </button>
+            </li>
+            <li>
+              <button type="button" class="dropdown-item d-flex align-items-center" data-bs-theme-value="system"
+                onclick="toggleTheme('system')">
+                <i class="bi bi-circle-half me-2"></i>
+                Auto
+              </button>
+            </li>
+          </ul>
         </div>
       </div>
-    </nav>
-    <div class="container-xxl">
-      <div class="my-3 d-flex flex-column justify-content-between">
-        <div
-          class="btn-group mb-3"
-          role="group"
-          aria-label="Theme toggle"
-        >
-          <input
-            type="radio"
-            class="btn-check"
-            name="demoTheme"
-            id="demoThemeNone"
-            autocomplete="off"
-            onclick="swapAppTheme()"
-            checked
-          />
-          <label class="btn btn-outline-primary" for="demoThemeNone">None</label>
-
-          <input
-            type="radio"
-            class="btn-check"
-            name="demoTheme"
-            id="demoThemeDeskbooker"
-            autocomplete="off"
-            onclick="swapAppTheme('deskbooker')"
-          />
-          <label class="btn btn-outline-primary" for="demoThemeDeskbooker">Deskbooker</label>
-
-          <input
-            type="radio"
-            class="btn-check"
-            name="demoTheme"
-            id="demoThemeIris"
-            autocomplete="off"
-            onclick="swapAppTheme('iris')"
-          />
-          <label class="btn btn-outline-primary" for="demoThemeIris">Iris</label>
-
-          <input
-            type="radio"
-            class="btn-check"
-            name="demoTheme"
-            id="demoThemeHSES"
-            autocomplete="off"
-            onclick="swapAppTheme('hses')"
-          />
-          <label class="btn btn-outline-primary" for="demoThemeHSES">HSES</label>
+    </div>
+  </nav>
+  <div class="container-xxl">
+    <div class="my-3 d-flex flex-column justify-content-between">
+      <div class="btn-group mb-3" role="group" aria-label="Theme toggle">
+        <input type="radio" class="btn-check" name="demoTheme" id="demoThemeNone" autocomplete="off"
+          onclick="swapAppTheme()" checked />
+        <label class="btn btn-outline-primary" for="demoThemeNone">None</label>
+        
+        <input type="radio" class="btn-check" name="demoTheme" id="demoThemePortal" autocomplete="off"
+        onclick="swapAppTheme('portal')" />
+        <label class="btn btn-outline-primary" for="demoThemePortal">Portal</label>
+        
+        <input type="radio" class="btn-check" name="demoTheme" id="demoThemeIris" autocomplete="off"
+        onclick="swapAppTheme('iris')" />
+        <label class="btn btn-outline-primary" for="demoThemeIris">Iris</label>
+        
+        <input type="radio" class="btn-check" name="demoTheme" id="demoThemeHSES" autocomplete="off"
+        onclick="swapAppTheme('hses')" />
+        <label class="btn btn-outline-primary" for="demoThemeHSES">HSES</label>
+        
+        <input type="radio" class="btn-check" name="demoTheme" id="demoThemeQuality" autocomplete="off"
+        onclick="swapAppTheme('quality')" />
+        <label class="btn btn-outline-primary" for="demoThemeQuality">Quality</label>
+        
+        <input type="radio" class="btn-check" name="demoTheme" id="demoThemeDeskbooker" autocomplete="off"
+          onclick="swapAppTheme('deskbooker')" />
+        <label class="btn btn-outline-primary" for="demoThemeDeskbooker">Deskbooker</label>
+      </div>
+      <div>
+        <div class="mb-3">
+          <select id="demoComponentSelect" class="form-select" onchange="handleComponentSelect(this.value)">
+            <option value="">Select component...</option>
+            <option value="accordion">Accordion</option>
+            <option value="alert">Alert</option>
+            <option value="badge">Badge</option>
+            <option value="carousel">Carousel</option>
+            <option value="form">Form</option>
+            <option value="horizontalForm">Horizontal Form</option>
+            <option value="progress">Progress</option>
+            <option value="spinner">Spinner</option>
+            <option value="validation">Validation</option>
+          </select>
         </div>
-        <div>
-          <div class="mb-3">
-            <select id="demoComponentSelect" class="form-select" onchange="handleComponentSelect(this.value)">
-              <option value="">Select component...</option>
-              <option value="accordion">Accordion</option>
-              <option value="alert">Alert</option>
-              <option value="badge">Badge</option>
-              <option value="carousel">Carousel</option>
-              <option value="form">Form</option>
-              <option value="horizontalForm">Horizontal Form</option>
-              <option value="progress">Progress</option>
-              <option value="spinner">Spinner</option>
-              <option value="validation">Validation</option>
-            </select>
-          </div>
-          
-          <div class="btn-group" role="group" aria-label="Component toggle">
-            <!-- Button trigger modal -->
-            <button type="button" class="btn btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
-              Modal
-            </button>
-            
-            <button type="button" class="btn btn-outline-secondary"
-              data-bs-toggle="tooltip"
-              data-bs-title="This is a normal BS tooltip."
-              >
-              Tooltip
-            </button>
 
-            <button type="button" class="btn btn-outline-secondary" data-bs-toggle="popover" data-bs-title="Popover title" data-bs-content="And here's some amazing content. It's very engaging. Right?">
-              Popover
-            </button>
-          </div>
+        <div class="btn-group" role="group" aria-label="Component toggle">
+          <!-- Button trigger modal -->
+          <button type="button" class="btn btn-outline-secondary" data-bs-toggle="modal"
+            data-bs-target="#staticBackdrop">
+            Modal
+          </button>
+
+          <button type="button" class="btn btn-outline-secondary" data-bs-toggle="tooltip"
+            data-bs-title="This is a normal BS tooltip.">
+            Tooltip
+          </button>
+
+          <button type="button" class="btn btn-outline-secondary" data-bs-toggle="popover" data-bs-title="Popover title"
+            data-bs-content="And here's some amazing content. It's very engaging. Right?">
+            Popover
+          </button>
         </div>
       </div>
-
-      <div id="demo-container" class="container-sm mt-3"></div>
     </div>
 
-    <script src="bootstrap-source/dist/js/bootstrap.bundle.min.js"></script>
-    <script type="module" src="js/index.js"></script>
+    <div id="demo-container" class="container-sm mt-3"></div>
+  </div>
 
-    <script>
-      document.addEventListener("DOMContentLoaded", function () {
-        const savedTheme = getLocalStorageTheme();
-        toggleTheme(savedTheme);
+  <script src="bootstrap-source/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="js/site.js"></script>
+  <script type="module" src="js/index.js"></script>
 
-        setTooltips();
-      });
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      const savedTheme = getLocalStorageTheme();
+      toggleTheme(savedTheme);
 
-      function setTooltips() {
-        const tooltipTriggerList = document.querySelectorAll(
-          '[data-bs-toggle="tooltip"]',
-        );
-        const tooltipList = [...tooltipTriggerList].map(
-          (tooltipTriggerEl) => new bootstrap.Tooltip(tooltipTriggerEl),
-        );
-        
-        const popoverTriggerList = document.querySelectorAll(
-          '[data-bs-toggle="popover"]',
-        );
-        const popoverList = [...popoverTriggerList].map(
-          (popoverTriggerEl) => new bootstrap.Popover(popoverTriggerEl),
-        );
-      }
-    </script>
+      setTooltips();
+    });
+  </script>
+</body>
 
-    <script>
-      function swapAppTheme(appTheme) {
-        if (!appTheme) {
-          document.getElementById("theme-style").href =
-            "bootstrap-source/dist/css/bootstrap.css";
-          return;
-        }
-        document.getElementById("theme-style").href =
-          `css/${appTheme}-bootstrap.css`;
-      }
-    </script>
-
-    <script>
-      function handleComponentSelect(value) {
-        switch (value) {
-          case 'accordion':
-            addAccordion();
-            break;
-          case 'alert':
-            addAlert();
-            break;
-          case 'badge':
-            addBadge();
-            break;
-          case 'carousel':
-            addCarousel();
-            break;
-          case 'form':
-            addForm();
-            break;
-          case 'horizontalForm':
-            addHorizontalForm();
-            break;
-          case 'progress':
-            addProgress();
-            break;
-          case 'spinner':
-            addSpinner();
-            break;
-          case 'validation':
-            addValidation();
-            break;
-          default:
-            document.getElementById('demo-container').innerHTML = '';
-        }
-      }
-    </script>
-
-    <script>
-      function toggleTheme(theme) {
-        const html = document.documentElement;
-        localStorage.setItem('bs-theme', theme);
-
-        if (theme === 'system') {
-          const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-          html.setAttribute('data-bs-theme', prefersDark ? 'dark' : 'light');
-        } else {
-          html.setAttribute('data-bs-theme', theme);
-        }
-
-        showActiveTheme(theme);
-      }
-
-      function showActiveTheme(theme) {
-        const themeButton = document.querySelector('#bd-theme-text');
-        const activeBtn = document.querySelector(`[data-bs-theme-value="${theme}"]`);
-        
-        if (themeButton && activeBtn) {
-          const activeIcon = activeBtn.querySelector('i');
-          const btnIcon = themeButton.querySelector('i');
-          
-          if (activeIcon && btnIcon) {
-            // Use the classList instead of cloning to prevent "empty" nodes
-            btnIcon.className = activeIcon.className; 
-            btnIcon.classList.remove('me-2'); // Clean up menu-specific classes
-          }
-        }
-
-        // 2. Remove 'active' class from all items and add to current
-        document.querySelectorAll('[data-bs-theme-value]').forEach(el => {
-          el.classList.remove('active');
-          el.setAttribute('aria-pressed', 'false');
-        });
-
-        if (activeBtn) {
-          activeBtn.classList.add('active');
-          activeBtn.setAttribute('aria-pressed', 'true');
-        }
-      }
-
-      // add event listener to update theme icon when system theme changes (for system mode)
-      window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', () => {
-        const savedTheme = getLocalStorageTheme();
-        
-        // Only auto-switch the UI if the user is currently in 'system' mode
-        if (savedTheme === 'system') {
-          toggleTheme('system');
-        }
-      });
-    </script>
-  </body>
 </html>
