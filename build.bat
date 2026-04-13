@@ -12,9 +12,6 @@
 
 .\compiler\sass.bat scss/wims.scss css/wims-bootstrap.css
 
-.\compiler\sass.bat scss/r_and_d.scss css/r_and_d-bootstrap.css
+.\compiler\sass.bat scss/randd.scss css/randd-bootstrap.css
 
 .\compiler\sass.bat scss/quality.scss css/quality-bootstrap.css
-
-
-echo Build complete!

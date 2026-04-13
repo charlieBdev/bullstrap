@@ -7,7 +7,6 @@
   <title>Theme Demo</title>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
   <link id="theme-style" rel="stylesheet" href="bootstrap-source/dist/css/bootstrap.css" />
-  <link rel="stylesheet" href="css/style.css" />
   <script>
     function getLocalStorageTheme() {
       return localStorage.getItem('bs-theme') || 'system';
@@ -120,6 +119,7 @@
       </div>
     </div>
   </nav>
+  <!-- Apps -->
   <div class="container-xxl">
     <div class="my-3 d-flex flex-column justify-content-between">
       <div class="btn-group mb-3" role="group" aria-label="Theme toggle">
@@ -148,8 +148,8 @@
         <label class="btn btn-outline-primary" for="demoThemeWIMS">WIMS</label>
 
         <input type="radio" class="btn-check" name="demoTheme" id="demoThemeRAndD" autocomplete="off"
-          onclick="swapAppTheme('r_and_d')" />
-        <label class="btn btn-outline-primary" for="demoThemeRAndD">R & D</label>
+          onclick="swapAppTheme('randd')" />
+        <label class="btn btn-outline-primary" for="demoThemeRAndD">R&D</label>
 
         <input type="radio" class="btn-check" name="demoTheme" id="demoThemeQuality" autocomplete="off"
         onclick="swapAppTheme('quality')" />
@@ -157,8 +157,9 @@
         
         <input type="radio" class="btn-check" name="demoTheme" id="demoThemeDeskbooker" autocomplete="off"
           onclick="swapAppTheme('deskbooker')" />
-        <label class="btn btn-outline-primary" for="demoThemeDeskbooker">Deskbooker</label>
+        <label class="btn btn-outline-primary" for="demoThemeDeskbooker">DeskBooker</label>
       </div>
+      <!-- Components -->
       <div>
         <div class="mb-3">
           <select id="demoComponentSelect" class="form-select" onchange="handleComponentSelect(this.value)">
@@ -176,7 +177,6 @@
         </div>
 
         <div class="btn-group" role="group" aria-label="Component toggle">
-          <!-- Button trigger modal -->
           <button type="button" class="btn btn-outline-secondary" data-bs-toggle="modal"
             data-bs-target="#staticBackdrop">
             Modal
@@ -211,5 +211,4 @@
     });
   </script>
 </body>
-
 </html>
