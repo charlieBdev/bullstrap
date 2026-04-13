@@ -44,11 +44,20 @@ function handleComponentSelect(value) {
         case 'horizontalForm':
             addHorizontalForm();
             break;
+        case 'pagination':
+            addPagination();
+            break;
         case 'progress':
             addProgress();
             break;
         case 'spinner':
             addSpinner();
+            break;
+        case 'table':
+            addTable();
+            break;
+        case 'typography':
+            addTypography();
             break;
         case 'validation':
             addValidation();
