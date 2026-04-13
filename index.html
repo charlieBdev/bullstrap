@@ -233,6 +233,8 @@
       document.addEventListener("DOMContentLoaded", function () {
         const savedTheme = getLocalStorageTheme();
         toggleTheme(savedTheme);
+
+        setTooltips();
       });
 
       function setTooltips() {

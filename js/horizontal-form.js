@@ -53,4 +53,6 @@ export function addHorizontalForm() {
   `;
 
   container.innerHTML = html;
+
+  setTooltips();
 }

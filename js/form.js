@@ -177,4 +177,6 @@ export function addForm() {
   if (indeterminateCheckbox) {
     indeterminateCheckbox.indeterminate = true;
   }
+
+  setTooltips();
 }

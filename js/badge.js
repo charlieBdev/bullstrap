@@ -47,4 +47,6 @@ export function addBadge() {
   `;
 
   container.innerHTML = html;
+
+  setTooltips();
 }

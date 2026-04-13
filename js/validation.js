@@ -89,4 +89,6 @@ export function addValidation() {
       }, false)
     })
   })();
+
+  setTooltips();
 }

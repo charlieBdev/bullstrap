@@ -45,4 +45,6 @@ export function addSpinner() {
 	`;
 
 	container.innerHTML = html;
+
+  setTooltips();
 }

@@ -22,4 +22,6 @@ export function addProgress() {
   `;
 
   container.innerHTML = html;
+
+  setTooltips();
 }

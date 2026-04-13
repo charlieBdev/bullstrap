@@ -29,4 +29,6 @@ export function addAlert() {
   `;
 
   container.innerHTML = html;
+
+  setTooltips();
 }

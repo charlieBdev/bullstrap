@@ -43,4 +43,6 @@ export function addCarousel() {
   `;
 
   container.innerHTML = html;
+
+  setTooltips();
 }

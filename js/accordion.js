@@ -43,4 +43,6 @@ export function addAccordion() {
   `;
 
   container.innerHTML = html;
+
+  setTooltips();
 }
