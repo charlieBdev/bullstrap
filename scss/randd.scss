@@ -1,9 +1,5 @@
-@import "../bootstrap-source/scss/functions";
-
 $primary: #008755;
-$primary-rgb: to-rgb($primary);
+
 // @import "bb";
 
-// 3. THE FINAL BUILD
-// Now we bring it all together.
 @import "../bootstrap-source/scss/bootstrap";
