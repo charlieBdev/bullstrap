@@ -1,9 +1,22 @@
-// 1. The main Hex color
-$primary: #008755; 
+// 1. FUNCTIONS (The engine)
+@import "../bootstrap-source/scss/functions";
 
-// 2. The RGB version (Required for transparent tints)
-// You can get these numbers from any color picker
-$primary-rgb: 0, 135, 85;
-
+// 2. YOUR CUSTOM SINGLE VARIABLES
+// Put $primary here. This replaces Bootstrap's default blue.
+$primary: #008755;
+$primary-rgb: to-rgb($primary);
 @import "bb";
+
+// 3. BOOTSTRAP DEFAULTS
+// This loads all the other defaults (like $secondary, $success, etc.)
+@import "../bootstrap-source/scss/variables";
+@import "../bootstrap-source/scss/variables-dark";
+
+// 4. Map Overrides (Using map-merge to be safe)
+$theme-colors-dark: map-merge($theme-colors-dark, (
+  "primary": tint-color($primary, 60%)
+));
+
+// 5. THE FINAL BUILD
+// Now we bring it all together.
 @import "../bootstrap-source/scss/bootstrap";
