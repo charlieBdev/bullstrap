@@ -16,6 +16,10 @@ function setTooltips() {
     );
 }
 
+function getLocalStorageTheme() {
+    return localStorage.getItem('bs-theme') || 'system';
+}
+
 function swapAppTheme(appTheme) {
     if (!appTheme) {
         document.getElementById("theme-style").href =
@@ -69,21 +73,6 @@ function handleComponentSelect(value) {
     }
 }
 
-function toggleTheme(theme) {
-    console.log(`Toggling theme to ${theme}`);
-    const html = document.documentElement;
-    localStorage.setItem('bs-theme', theme);
-
-    if (theme === 'system') {
-        const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-        html.setAttribute('data-bs-theme', prefersDark ? 'dark' : 'light');
-    } else {
-        html.setAttribute('data-bs-theme', theme);
-    }
-
-    showActiveTheme(theme);
-}
-
 function showActiveTheme(theme) {
     const themeButton = document.querySelector('#bd-theme-text');
     const activeBtn = document.querySelector(`[data-bs-theme-value="${theme}"]`);
@@ -107,6 +96,24 @@ function showActiveTheme(theme) {
         activeBtn.classList.add('active');
         activeBtn.setAttribute('aria-pressed', 'true');
     }
+};
+
+function toggleTheme(theme) {
+    const html = document.documentElement;
+
+    localStorage.setItem('bs-theme', theme);
+
+    let activeTheme;
+    if (theme === 'system') {
+        const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+        activeTheme = prefersDark ? 'dark' : 'light';
+    } else {
+        activeTheme = theme;
+    }
+
+    html.setAttribute('data-bs-theme', activeTheme);
+
+    showActiveTheme(theme);
 }
 
 window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', () => {

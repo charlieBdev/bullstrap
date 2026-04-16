@@ -9,13 +9,10 @@
   <link id="theme-style" rel="stylesheet" href="bootstrap-source/dist/css/bootstrap.css" />
   <link rel="stylesheet" href="https://rawcdn.githack.com/charlieBdev/cbToast/fc75514980cbd1382a0c6232a8539afa1d684db0/dist/cbToast.min.css" />
   <script>
-    function getLocalStorageTheme() {
-      return localStorage.getItem('bs-theme') || 'system';
-    }
     // Set initial theme immediately to prevent flash
     (function () {
       const html = document.documentElement;
-      const savedTheme = getLocalStorageTheme();
+      const savedTheme = localStorage.getItem('bs-theme') || 'system';
 
       if (savedTheme === 'system') {
         const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
@@ -91,7 +88,7 @@
         <div class="nav-item dropdown mt-2 mt-lg-0">
           <button id="bd-theme-text" class="btn btn-outline-primary dropdown-toggle d-flex align-items-center"
             type="button" data-bs-toggle="dropdown" aria-expanded="false">
-            <i class="bi"></i>
+            <i id="theme-icon" class="bi bi-circle-half opacity-0"></i>
           </button>
           <ul class="dropdown-menu dropdown-menu-lg-end shadow" aria-labelledby="bd-theme-text">
             <li>
@@ -213,7 +210,8 @@
   <script type="module">
     document.addEventListener("DOMContentLoaded", function () {
       const savedTheme = getLocalStorageTheme();
-      toggleTheme(savedTheme);
+
+      showActiveTheme(savedTheme);
 
       setTooltips();
     });
