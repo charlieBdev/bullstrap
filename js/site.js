@@ -1,4 +1,4 @@
-import cbToast from 'https://rawcdn.githack.com/charlieBdev/cbToast/fc75514980cbd1382a0c6232a8539afa1d684db0/dist/cbToast.min.js';
+import cbToast from 'https://raw.githack.com/charlieBdev/cbToast/main/dist/cbToast.min.js';
 
 function setTooltips() {
     const tooltipTriggerList = document.querySelectorAll(
