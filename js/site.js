@@ -143,7 +143,7 @@ function showRandomToast() {
         title: capitalizedTitle,
         message: `This is ${article} ${type} notification.`,
         type: type,
-        duration: 0,
+        duration: 3000,
         useBS5Theme: true,
         // Optional: Pass the current site theme so the toast matches
         theme: document.documentElement.getAttribute('data-bs-theme') 
