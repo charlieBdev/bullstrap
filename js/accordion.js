@@ -1,4 +1,4 @@
-export function addAccordion() {
+export const addAccordion = () => {
   const container = document.getElementById("demo-container");
 
   const html = /* html */ `
@@ -43,6 +43,4 @@ export function addAccordion() {
   `;
 
   container.innerHTML = html;
-
-  setTooltips();
 }

@@ -1,4 +1,4 @@
-export function addProgress() {
+export const addProgress = () => {
   const container = document.getElementById("demo-container");
 
   const html = /* html */ `
@@ -22,6 +22,4 @@ export function addProgress() {
   `;
 
   container.innerHTML = html;
-
-  setTooltips();
 }

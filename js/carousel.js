@@ -1,4 +1,4 @@
-export function addCarousel() {
+export const addCarousel = () => {
   const container = document.getElementById("demo-container");
   
   const html = /* html */ `
@@ -43,6 +43,4 @@ export function addCarousel() {
   `;
 
   container.innerHTML = html;
-
-  setTooltips();
 }

@@ -1,4 +1,4 @@
-export function addHorizontalForm() {
+export const addHorizontalForm = () => {
   const container = document.getElementById("demo-container");
 
   const html = /* html */ `
@@ -53,6 +53,4 @@ export function addHorizontalForm() {
   `;
 
   container.innerHTML = html;
-
-  setTooltips();
 }

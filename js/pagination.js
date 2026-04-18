@@ -1,4 +1,4 @@
-export function addPagination() {
+export const addPagination = () => {
     const container = document.getElementById("demo-container");
 
     const html = /* html */ `
@@ -41,6 +41,4 @@ export function addPagination() {
     `;
 
     container.innerHTML = html;
-
-    setTooltips();
 }

@@ -1,4 +1,4 @@
-export function addTypography() {
+export const addTypography = () => {
     const container = document.getElementById("demo-container");
 
     const html = /* html */ `
@@ -138,6 +138,4 @@ export function addTypography() {
     `;
 
     container.innerHTML = html;
-
-    setTooltips();
 }

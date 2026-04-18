@@ -1,4 +1,4 @@
-export function addForm() {
+export const addForm = () => {
   const container = document.getElementById("demo-container");
 
   const html = /* html */ `
@@ -177,6 +177,4 @@ export function addForm() {
   if (indeterminateCheckbox) {
     indeterminateCheckbox.indeterminate = true;
   }
-
-  setTooltips();
 }

@@ -1,4 +1,4 @@
-export function addBadge() {
+export const addBadge = () => {
   const container = document.getElementById("demo-container");
 
   const html = /* html */ `
@@ -47,6 +47,4 @@ export function addBadge() {
   `;
 
   container.innerHTML = html;
-
-  setTooltips();
 }

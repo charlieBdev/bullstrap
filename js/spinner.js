@@ -1,4 +1,4 @@
-export function addSpinner() {
+export const addSpinner = () => {
 	const container = document.getElementById('demo-container');
 	
 	const html = /* html */ `
@@ -45,6 +45,4 @@ export function addSpinner() {
 	`;
 
 	container.innerHTML = html;
-
-  setTooltips();
 }

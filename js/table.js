@@ -1,4 +1,4 @@
-export function addTable() {
+export const addTable = () => {
     const container = document.getElementById("demo-container");
 
     const html = /* html */ `
@@ -36,6 +36,4 @@ export function addTable() {
     `;
 
     container.innerHTML = html;
-    
-    setTooltips();
 }

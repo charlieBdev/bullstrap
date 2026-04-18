@@ -1,4 +1,5 @@
-export function addAlert() {
+export const addAlert = () => {
+
   const container = document.getElementById("demo-container");
 
   const html = /* html */ `
@@ -29,6 +30,4 @@ export function addAlert() {
   `;
 
   container.innerHTML = html;
-
-  setTooltips();
 }

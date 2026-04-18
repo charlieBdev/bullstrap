@@ -1,86 +1,112 @@
 import cbToast from 'https://raw.githack.com/charlieBdev/cbToast/main/dist/cbToast.min.js';
+import { 
+    addAccordion, addAlert, addBadge, addCarousel, 
+    addForm, addHorizontalForm, addPagination, addProgress, 
+    addSpinner, addTable, addTypography, addValidation 
+} from './index.js';
 
-function setTooltips() {
-    const tooltipTriggerList = document.querySelectorAll(
-        '[data-bs-toggle="tooltip"]',
-    );
-    const tooltipList = [...tooltipTriggerList].map(
-        (tooltipTriggerEl) => new bootstrap.Tooltip(tooltipTriggerEl),
-    );
+// --- 1. Initialization ---
+init();
 
-    const popoverTriggerList = document.querySelectorAll(
-        '[data-bs-toggle="popover"]',
-    );
-    const popoverList = [...popoverTriggerList].map(
-        (popoverTriggerEl) => new bootstrap.Popover(popoverTriggerEl),
-    );
+function init() {
+    const savedTheme = getLocalStorageTheme();
+    applyTheme(savedTheme);
+    setTooltips();
+    setupEventListeners();
 }
 
-function getLocalStorageTheme() {
-    return localStorage.getItem('bs-theme') || 'system';
+// --- 2. Event Listeners (The "No Window" Way) ---
+function setupEventListeners() {
+    // A. Component Selection
+    const selectEl = document.getElementById('demoComponentSelect');
+    if (selectEl) {
+        selectEl.addEventListener('change', (e) => handleComponentSelect(e.target.value));
+    }
+
+    // B. Bootstrap Theme Toggle (The Dropdown)
+    document.querySelectorAll('[data-bs-theme-value]').forEach(btn => {
+        btn.addEventListener('click', () => {
+            const theme = btn.getAttribute('data-bs-theme-value');
+            toggleTheme(theme);
+        });
+    });
+
+    // C. App Brand Themes (The Radio Buttons)
+    const themeGroup = document.getElementById('themeRadioGroup');
+    if (themeGroup) {
+        themeGroup.addEventListener('change', (e) => {
+            if (e.target.classList.contains('btn-check')) {
+                swapAppTheme(e.target.value);
+            }
+        });
+    }
+
+    // D. Toast Button
+    const toastBtn = document.getElementById("toastBtn");
+    if (toastBtn) {
+        toastBtn.addEventListener("click", showRandomToast);
+    }
+}
+
+// --- 3. Internal Logic ---
+
+function handleComponentSelect(value) {
+    const container = document.getElementById('demo-container');
+    container.innerHTML = ''; // Clear existing content
+
+    const components = {
+        accordion: addAccordion,
+        alert: addAlert,
+        badge: addBadge,
+        carousel: addCarousel,
+        form: addForm,
+        horizontalForm: addHorizontalForm,
+        pagination: addPagination,
+        progress: addProgress,
+        spinner: addSpinner,
+        table: addTable,
+        typography: addTypography,
+        validation: addValidation
+    };
+
+    if (components[value]) {
+        components[value]();
+    }
 }
 
 function swapAppTheme(appTheme) {
-    if (!appTheme) {
-        document.getElementById("theme-style").href =
-            "bootstrap-source/dist/css/bootstrap.css";
+    const themeStyle = document.getElementById("theme-style");
+    if (!appTheme || appTheme === 'none') {
+        themeStyle.href = "bootstrap-source/dist/css/bootstrap.css";
         return;
     }
-    document.getElementById("theme-style").href =
-        `css/${appTheme}-bootstrap.css`;
+    themeStyle.href = `css/${appTheme}-bootstrap.css`;
 }
 
-function handleComponentSelect(value) {
-    switch (value) {
-        case 'accordion':
-            addAccordion();
-            break;
-        case 'alert':
-            addAlert();
-            break;
-        case 'badge':
-            addBadge();
-            break;
-        case 'carousel':
-            addCarousel();
-            break;
-        case 'form':
-            addForm();
-            break;
-        case 'horizontalForm':
-            addHorizontalForm();
-            break;
-        case 'pagination':
-            addPagination();
-            break;
-        case 'progress':
-            addProgress();
-            break;
-        case 'spinner':
-            addSpinner();
-            break;
-        case 'table':
-            addTable();
-            break;
-        case 'typography':
-            addTypography();
-            break;
-        case 'validation':
-            addValidation();
-            break;
-        default:
-            document.getElementById('demo-container').innerHTML = '';
+function toggleTheme(theme) {
+    localStorage.setItem('bs-theme', theme);
+    applyTheme(theme);
+}
+
+function applyTheme(theme) {
+    const html = document.documentElement;
+    let activeTheme = theme;
+
+    if (theme === 'system') {
+        activeTheme = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
     }
+
+    html.setAttribute('data-bs-theme', activeTheme);
+    updateThemeUI(theme);
 }
 
-function showActiveTheme(theme) {
+function updateThemeUI(theme) {
     const themeButton = document.querySelector('#bd-theme-text');
     const activeBtn = document.querySelector(`[data-bs-theme-value="${theme}"]`);
 
     if (themeButton && activeBtn) {
         const activeIcon = activeBtn.querySelector('i');
         const btnIcon = themeButton.querySelector('i');
-
         if (activeIcon && btnIcon) {
             btnIcon.className = activeIcon.className;
             btnIcon.classList.remove('me-2');
@@ -88,98 +114,38 @@ function showActiveTheme(theme) {
     }
 
     document.querySelectorAll('[data-bs-theme-value]').forEach(el => {
-        el.classList.remove('active');
-        el.setAttribute('aria-pressed', 'false');
+        el.classList.toggle('active', el.getAttribute('data-bs-theme-value') === theme);
     });
-
-    if (activeBtn) {
-        activeBtn.classList.add('active');
-        activeBtn.setAttribute('aria-pressed', 'true');
-    }
-};
-
-function toggleTheme(theme) {
-    const html = document.documentElement;
-
-    localStorage.setItem('bs-theme', theme);
-
-    let activeTheme;
-    if (theme === 'system') {
-        const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-        activeTheme = prefersDark ? 'dark' : 'light';
-    } else {
-        activeTheme = theme;
-    }
-
-    html.setAttribute('data-bs-theme', activeTheme);
-
-    showActiveTheme(theme);
 }
 
-window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', () => {
-    const savedTheme = getLocalStorageTheme();
+function getLocalStorageTheme() {
+    return localStorage.getItem('bs-theme') || 'system';
+}
 
-    if (savedTheme === 'system') {
-        toggleTheme('system');
+function setTooltips() {
+    if (typeof bootstrap !== 'undefined') {
+        [...document.querySelectorAll('[data-bs-toggle="tooltip"]')].map(el => new bootstrap.Tooltip(el));
+        [...document.querySelectorAll('[data-bs-toggle="popover"]')].map(el => new bootstrap.Popover(el));
     }
-});
+}
 
-// add event listener for toast button
-document.addEventListener("DOMContentLoaded", function () {
-    const toastBtn = document.getElementById("toastBtn");
-    if (toastBtn) {
-        const optionsArray = [
-            {},
-            {
-                title: "Info",
-                message: "This is an info toast notification.",
-                type: "info",
-                position: "top-right",
-                duration: 3000,
-                onClose: () => console.log("Info toast closed")
-            },
-            {
-                title: "Success",
-                message: "This is a success toast notification.",
-                type: "success",
-                position: 'bottom-right',
-                duration: 3000,
-                onClose: () => console.log("Success toast closed")
-            },
-            {
-                title: "Warning",
-                message: "This is a warning toast notification.",
-                type: "warning",
-                position: 'bottom-left',
-                duration: 3000,
-                onClose: () => console.log("Warning toast closed")
-            },
-            {
-                title: "Error",
-                message: "This is an error toast notification.",
-                type: "error",
-                position: 'top-left',
-                duration: 3000,
-                onClose: () => console.log("Error toast closed")
-            }
-        ];
+function showRandomToast() {
+    const types = ["default", "info", "success", "warning", "error"];
+    const type = types[Math.floor(Math.random() * types.length)];
 
-        toastBtn.addEventListener("click", function () {
+    // 1. Capitalize the Title
+    const capitalizedTitle = type.charAt(0).toUpperCase() + type.slice(1);
 
-            const randomOptions = optionsArray[Math.floor(Math.random() * optionsArray.length)];
+    // 2. Fix a/an grammar
+    const article = (type === 'info' || type === 'error') ? 'an' : 'a';
 
-            // Use the object directly
-            if (Object.keys(randomOptions).length !== 0) {
-                randomOptions.lightMode = Math.random() < 0.5;
-                randomOptions.countdown = Math.random() < 0.5;
-            }
-
-            new cbToast(randomOptions);
-        });
-    }
-});
-
-window.toggleTheme = toggleTheme;
-window.swapAppTheme = swapAppTheme;
-window.handleComponentSelect = handleComponentSelect;
-window.setTooltips = setTooltips;
+    new cbToast({
+        title: capitalizedTitle,
+        message: `This is ${article} ${type} notification.`,
+        type: type,
+        duration: 0,
+        useBS5Theme: true,
+        // Optional: Pass the current site theme so the toast matches
+        theme: document.documentElement.getAttribute('data-bs-theme') 
+    });
+}

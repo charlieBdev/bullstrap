@@ -1,4 +1,4 @@
-export function addValidation() {
+export const addValidation = () => {
   const container = document.getElementById("demo-container");
 
   const html = /* html */ `
@@ -89,6 +89,4 @@ export function addValidation() {
       }, false)
     })
   })();
-
-  setTooltips();
 }

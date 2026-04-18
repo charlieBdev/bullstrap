@@ -92,22 +92,19 @@
           </button>
           <ul class="dropdown-menu dropdown-menu-lg-end shadow" aria-labelledby="bd-theme-text">
             <li>
-              <button type="button" class="dropdown-item d-flex align-items-center" data-bs-theme-value="light"
-                onclick="toggleTheme('light')">
+              <button type="button" class="dropdown-item d-flex align-items-center" data-bs-theme-value="light">
                 <i class="bi bi-sun-fill me-2"></i>
                 Light
               </button>
             </li>
             <li>
-              <button type="button" class="dropdown-item d-flex align-items-center" data-bs-theme-value="dark"
-                onclick="toggleTheme('dark')">
+              <button type="button" class="dropdown-item d-flex align-items-center" data-bs-theme-value="dark">
                 <i class="bi bi-moon-stars-fill me-2"></i>
                 Dark
               </button>
             </li>
             <li>
-              <button type="button" class="dropdown-item d-flex align-items-center" data-bs-theme-value="system"
-                onclick="toggleTheme('system')">
+              <button type="button" class="dropdown-item d-flex align-items-center" data-bs-theme-value="system">
                 <i class="bi bi-circle-half me-2"></i>
                 Auto
               </button>
@@ -120,47 +117,38 @@
   <!-- Apps -->
   <div class="container-xxl">
     <div class="my-3 d-flex flex-column justify-content-between">
-      <div class="btn-group mb-3" role="group" aria-label="Theme toggle">
-        <input type="radio" class="btn-check" name="demoTheme" id="demoThemeNone" autocomplete="off"
-          onclick="swapAppTheme()" checked />
+      <div class="d-flex flex-wrap gap-1 mb-3" role="group" aria-label="Theme toggle" id="themeRadioGroup">
+        <input type="radio" class="btn-check" name="demoTheme" id="demoThemeNone" value="none" autocomplete="off" checked />
         <label class="btn btn-outline-primary" for="demoThemeNone">None</label>
         
-        <input type="radio" class="btn-check" name="demoTheme" id="demoThemePortal" autocomplete="off"
-        onclick="swapAppTheme('portal')" />
+        <input type="radio" class="btn-check" name="demoTheme" id="demoThemePortal" value="portal" autocomplete="off" />
         <label class="btn btn-outline-primary" for="demoThemePortal">Portal</label>
         
-        <input type="radio" class="btn-check" name="demoTheme" id="demoThemeIris" autocomplete="off"
-        onclick="swapAppTheme('iris')" />
+        <input type="radio" class="btn-check" name="demoTheme" id="demoThemeIris" value="iris" autocomplete="off" />
         <label class="btn btn-outline-primary" for="demoThemeIris">Iris</label>
         
-        <input type="radio" class="btn-check" name="demoTheme" id="demoThemeHSES" autocomplete="off"
-        onclick="swapAppTheme('hses')" />
+        <input type="radio" class="btn-check" name="demoTheme" id="demoThemeHSES" value="hses" autocomplete="off" />
         <label class="btn btn-outline-primary" for="demoThemeHSES">HSES</label>
 
-        <input type="radio" class="btn-check" name="demoTheme" id="demoThemeProperty" autocomplete="off"
-          onclick="swapAppTheme('property')" />
+        <input type="radio" class="btn-check" name="demoTheme" id="demoThemeProperty" value="property" autocomplete="off" />
         <label class="btn btn-outline-primary" for="demoThemeProperty">Property</label>
 
-        <input type="radio" class="btn-check" name="demoTheme" id="demoThemeWIMS" autocomplete="off"
-          onclick="swapAppTheme('wims')" />
+        <input type="radio" class="btn-check" name="demoTheme" id="demoThemeWIMS" value="wims" autocomplete="off" />
         <label class="btn btn-outline-primary" for="demoThemeWIMS">WIMS</label>
 
-        <input type="radio" class="btn-check" name="demoTheme" id="demoThemeRAndD" autocomplete="off"
-          onclick="swapAppTheme('randd')" />
+        <input type="radio" class="btn-check" name="demoTheme" id="demoThemeRAndD" value="randd" autocomplete="off" />
         <label class="btn btn-outline-primary" for="demoThemeRAndD">R&D</label>
 
-        <input type="radio" class="btn-check" name="demoTheme" id="demoThemeQuality" autocomplete="off"
-        onclick="swapAppTheme('quality')" />
+        <input type="radio" class="btn-check" name="demoTheme" id="demoThemeQuality" value="quality" autocomplete="off" />
         <label class="btn btn-outline-primary" for="demoThemeQuality">Quality</label>
         
-        <input type="radio" class="btn-check" name="demoTheme" id="demoThemeDeskbooker" autocomplete="off"
-          onclick="swapAppTheme('deskbooker')" />
+        <input type="radio" class="btn-check" name="demoTheme" id="demoThemeDeskbooker" value="deskbooker" autocomplete="off" />
         <label class="btn btn-outline-primary" for="demoThemeDeskbooker">DeskBooker</label>
       </div>
       <!-- Components -->
       <div>
         <div class="mb-3">
-          <select id="demoComponentSelect" class="form-select" onchange="handleComponentSelect(this.value)">
+          <select id="demoComponentSelect" class="form-select">
             <option value="">Select component...</option>
             <option value="accordion">Accordion</option>
             <option value="alert">Alert</option>
@@ -205,9 +193,8 @@
 
   <script src="bootstrap-source/dist/js/bootstrap.bundle.min.js"></script>
   <script type="module" src="js/site.js"></script>
-  <script type="module" src="js/index.js"></script>
 
-  <script type="module">
+  <!-- <script type="module">
     document.addEventListener("DOMContentLoaded", function () {
       const savedTheme = getLocalStorageTheme();
 
@@ -215,6 +202,6 @@
 
       setTooltips();
     });
-  </script>
+  </script> -->
 </body>
 </html>
