@@ -139,7 +139,7 @@ function showRandomToast() {
     // 2. Fix a/an grammar
     const article = (type === 'info' || type === 'error') ? 'an' : 'a';
 
-    new cbToast({
+    cbToast({
         title: capitalizedTitle,
         message: `This is ${article} ${type} notification.`,
         type: type,
