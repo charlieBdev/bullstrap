@@ -6,6 +6,7 @@ export * from './form.js';
 export * from './horizontal-form.js';
 export * from './pagination.js';
 export * from './progress.js';
+export * from './select.js';
 export * from './spinner.js';
 export * from './table.js';
 export * from './typography.js';

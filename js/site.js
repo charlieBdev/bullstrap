@@ -1,7 +1,7 @@
 import cbToast from 'https://raw.githack.com/charlieBdev/cbToast/main/dist/cbToast.min.js';
 import { 
     addAccordion, addAlert, addBadge, addCarousel, 
-    addForm, addHorizontalForm, addPagination, addProgress, 
+    addForm, addHorizontalForm, addPagination, addProgress, addSelect,
     addSpinner, addTable, addTypography, addValidation 
 } from './index.js';
 
@@ -63,6 +63,7 @@ function handleComponentSelect(value) {
         horizontalForm: addHorizontalForm,
         pagination: addPagination,
         progress: addProgress,
+        select: addSelect,
         spinner: addSpinner,
         table: addTable,
         typography: addTypography,
