@@ -1,85 +1,41 @@
 export const addSelect = () => {
-  const container = document.getElementById("demo-container");
-  
-  const html = /* html */ `
-    <div class="d-flex flex-column gap-3">
-      <div>
-        <label for="exampleSelect" class="form-label">Example select</label>
-        <select class="form-select" id="exampleSelect" style="width: 50%">
-        </select>
-      </div>
-      <div>
-        <label for="exampleSelectMultiple" class="form-label">Example multiple select</label>
-        <select class="form-select" id="exampleSelectMultiple" style="width: 50%" multiple>
-        </select>
-      </div>
-    </div>
-  `;
+    const container = document.getElementById("demo-container");
+    if (!container) return; // Guard clause
 
-  container.innerHTML = html;
+    const html = /* html */ `
+        <div class="d-flex flex-column gap-3">
+            <label for="exampleSelect" class="form-label">Single Select</label>
+            <select id="exampleSelect" class="form-select">
+                <option></option>
+                <option value="1">One</option>
+                <option value="2">Two</option>
+                <option value="3">Three</option>
+            </select>
+                
+            <label for="exampleSelectMultiple" class="form-label">Multiple Select</label>
+            <select id="exampleSelectMultiple" class="form-select" multiple>
+                <option value="1">One</option>
+                <option value="2">Two</option>
+                <option value="3">Three</option>
+            </select>
+        </div>
+    `;
 
-  var data = [
-      {
-          id: '',
-          text: ''
-      },
-      {
-          id: 1,
-          text: 'war'
-      },
-      {
-          id: 2,
-          text: 'peace'
-      },
-      {
-          id: 3,
-          text: 'love'
-      },
-      {
-          id: 4,
-          text: 'hate'
-      }
-  ];
+    container.innerHTML = html;
 
-  var dataMulti = [
-      {
-          id: '-1',
-          text: 'main'
-      },
-      {
-          id: 1,
-          text: 'bug'
-      },
-      {
-          id: 2,
-          text: 'duplicate'
-      },
-      {
-          id: 3,
-          text: 'invalid'
-      },
-      {
-          id: 4,
-          text: 'wontfix'
-      }
-  ];
-
-  function createSelects() {
-      // Initialize Select2
+    // Initialize Select2
+    // Single Select
     $('#exampleSelect').select2({
-      theme: 'bootstrap-5',
-      placeholder: 'Select an option',
-      data: data
+        theme: 'bootstrap-5',
+        placeholder: 'Select an option',
+        width: '100%' // Ensures it fills the container correctly
     });
 
+    // Multiple Select
     $('#exampleSelectMultiple').select2({
-      theme: 'bootstrap-5',
-      closeOnSelect: false,
-      allowClear: true,
-      placeholder: 'Select options',
-      data: dataMulti
+        theme: 'bootstrap-5',
+        placeholder: 'Select options',
+        closeOnSelect: false,
+        width: '100%'
     });
-  }
-
-  createSelects();
 }

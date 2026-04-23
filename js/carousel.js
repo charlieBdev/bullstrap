@@ -1,8 +1,8 @@
 export const addCarousel = () => {
   const container = document.getElementById("demo-container");
-  
+
   const html = /* html */ `
-    <div id="carouselExampleCaptions" class="carousel slide" data-bs-ride="false">
+    <div id="carouselExampleCaptions" class="carousel slide">
       <div class="carousel-indicators">
         <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
         <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="1" aria-label="Slide 2"></button>
@@ -17,14 +17,14 @@ export const addCarousel = () => {
           </div>
         </div>
         <div class="carousel-item">
-          <img src="https://placehold.co/600x400/orange/white" class="d-block w-100" alt="...">
+          <img src="https://placehold.co/600x400/000000/FFF" class="d-block w-100" alt="...">
           <div class="carousel-caption d-none d-md-block">
             <h5>Second slide label</h5>
             <p>Some representative placeholder content for the second slide.</p>
           </div>
         </div>
         <div class="carousel-item">
-          <img src="https://placehold.co/600x400/transparent/F00" class="d-block w-100" alt="...">
+          <img src="https://placehold.co/600x400/000000/FFF" class="d-block w-100" alt="...">
           <div class="carousel-caption d-none d-md-block">
             <h5>Third slide label</h5>
             <p>Some representative placeholder content for the third slide.</p>
